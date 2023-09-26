@@ -286,9 +286,3 @@ input[type="checkbox"]:checked {
 .OptionChoiceTotal {
   color: var(--darkPink);
 }
-
-.NameBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
