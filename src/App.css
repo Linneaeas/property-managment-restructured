@@ -1,0 +1,288 @@
+/* UNIVERSAL */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:root {
+  --lightPink: rgb(255, 240, 248);
+  --white: rgb(255, 255, 255);
+  --darkerHover: rgb(244, 161, 206);
+  --darkPink: rgb(196, 96, 149);
+}
+body {
+  background-color: var(--lightPink);
+  font-family: Quicksand;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--darkPink);
+  text-shadow: 2px 2px 2px rgb(196, 96, 149, 0.4);
+}
+
+.ColHeadlineBigger {
+  color: var(--darkPink);
+  text-shadow: 2px 2px 2px rgb(196, 96, 149, 0.4);
+}
+.ColHeadline {
+  color: var(--darkPink);
+}
+.SmallHeadline {
+  font-size: 20px;
+  margin-top: 0.5rem;
+  text-shadow: 2px 1px 1px rgb(196, 96, 149, 0.2);
+}
+
+/*BUTTONS & LINKS & INPUTS */
+
+button:hover,
+input:hover,
+select:hover,
+a:hover {
+  cursor: pointer;
+}
+button:hover,
+a:hover {
+  color: var(--darkerHover);
+  scale: 120%;
+}
+.LoginBTN,
+.LogoutBTN {
+  font-family: inherit;
+  border: none;
+  padding: 10px;
+  color: var(--white);
+}
+.LoginBTN {
+  background-color: var(--darkPink);
+  font-size: 20px;
+  border-radius: 25px;
+}
+.LogoutBTN {
+  font-size: 15px;
+  background: none;
+  float: left;
+}
+.AddBTN,
+.EditBTN,
+.SaveBTN,
+.DeleteBTN {
+  background-size: cover;
+  aspect-ratio: 1;
+  border: none;
+}
+.AddBTN {
+  background-image: url("Images/AddBTN.png");
+  width: 40px;
+}
+.EditBTN {
+  background-image: url("Images/EditBTN.png");
+  width: 20px;
+}
+.SaveBTN {
+  background-image: url("Images/SaveBTN.png");
+  width: 25px;
+}
+.DeleteBTN {
+  background-image: url("Images/DeleteBTN.png");
+  width: 25px;
+}
+.CheckedIcon {
+  width: 20px;
+}
+
+.NavLink {
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 20px;
+  color: var(--white);
+}
+
+select,
+input[type="text"],
+[type="password"] {
+  background: rgb(196, 96, 149, 0.4);
+  border-radius: 25px;
+  border: none;
+  height: 30px;
+  font-family: inherit;
+  font-size: 15px;
+}
+.SmallInput {
+  width: 3rem;
+}
+.LoginLabel {
+  color: var(--darkPink);
+  font-size: 17px;
+}
+
+/*HEADERS & NAVIGATION LAYOUT*/
+
+.StartPageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: var(--darkPink);
+  color: var(--white);
+  padding: 0.5rem;
+}
+.AdminNavContainer {
+  background-color: var(--darkPink);
+  color: var(--white);
+}
+.AdminNavMainContent {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+  gap: 3rem;
+  padding: 0.75rem;
+}
+
+/*DROPDOWN*/
+.Dropdown {
+  position: relative;
+}
+.DropdownMenu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.25rem);
+  background-color: var(--lightPink);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: 2px 3px 6px 2px rgb(196, 96, 149, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.DropdownMenu.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.DDLink {
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-family: inherit;
+  color: var(--darkPink);
+  font-size: 17px;
+  padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+  display: flex;
+}
+
+/*PAGE CONTENT*/
+
+.PropertyContainer {
+  display: flex;
+  justify-content: center;
+  padding: 3em;
+}
+
+.LoginForm,
+.PropertyContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1em;
+}
+.LoginForm,
+.PropertyContent {
+  flex-direction: column;
+}
+
+.PropertyContentNames {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  gap: 2rem;
+}
+
+.PropertyTable td,
+th {
+  text-align: left;
+  padding-left: 1rem;
+}
+.AddContent,
+.SaveOrDeleteBTNBox {
+  display: flex;
+  gap: 1rem;
+  position: sticky;
+}
+
+.Checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 22px;
+  height: 22px;
+  background-color: rgb(196, 96, 149, 0.4);
+  border-radius: 50%;
+  outline: none;
+  position: relative;
+}
+
+input[type="checkbox"]:hover {
+  cursor: pointer;
+  scale: calc(120%);
+  background-color: var(--darkPink);
+  position: absolute;
+  display: block;
+}
+
+input[type="checkbox"]:checked {
+  content: url("Images/CheckedIcon.png");
+  background-color: transparent;
+}
+
+.OptionChoice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.NoSelection {
+  display: flex;
+  justify-content: center;
+  color: var(--darkPink);
+}
+
+.OptionChoiceFacilities {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.OverviewRow {
+  padding: 1em;
+  box-shadow: 0 1.5px 1px 0 rgb(196, 96, 149, 0.3);
+}
+
+.OptionChoiceTotal {
+  color: var(--darkPink);
+}
