@@ -6,7 +6,7 @@ import useDataTableActions from '../Components/datatable-actions';
 
 export function AdminPropertyStandards() {
     const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'standard');
-    
+
     return (
       <div className="PropertyContainer">
         <OutsideClickListener onOutsideClick={handleOutsideClick}>
@@ -39,6 +39,4 @@ export function AdminPropertyStandards() {
           </div>
         </OutsideClickListener>
       </div>
-    );
-  }
-  
+    ); }

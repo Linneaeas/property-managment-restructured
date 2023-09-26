@@ -66,17 +66,18 @@ const useDataTableActions = (initialData, itemType) => {
         handleSaveToLocalStorage(updatedData);
       };
 
-  const handleSave = (id) => {
-    const updatedData = data.map((item) => {
-      if (item.id === id) {
-        setIsEditingItem(false);
-        return { ...item, isEditing: false, name: item.editedName };
-      }
-      return item;
-    });
-    setData(updatedData);
-    handleSaveToLocalStorage(updatedData);
-  };
+      const handleSave = (id, editedName) => {
+        const updatedData = data.map((item) => {
+          if (item.id === id) {
+            setIsEditingItem(false);
+            return { ...item, isEditing: false, name: editedName };
+          }
+          return item;
+        });
+        setData(updatedData);
+        handleSaveToLocalStorage(updatedData);
+      };
+      
 
   const handleDelete = (id) => {
     const updatedData = data.filter((item) => item.id !== id);

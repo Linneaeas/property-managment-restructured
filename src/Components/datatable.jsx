@@ -4,40 +4,49 @@ import { EditButton, SaveButton, DeleteButton } from "./buttons";
 import {useDataTableActions} from "./datatable-actions"
 
 
+
 export function DataTableRow({ item, onEdit, onDelete, onSave, handleInputChange }) {
-    const [editedName, setEditedName] = useState(item.name); // Add local state for editedName
-    const handleEditInputChange = (e) => {
-        setEditedName(e.target.value);
-      };
+  const [editedName, setEditedName] = useState(item.name);
+
+  const handleEditInputChange = (e) => {
+    setEditedName(e.target.value);
+  };
+
   return (
     <tr key={item.id}>
-    <td className="EditBTNBox">
-      <EditButton onEdit={() => onEdit(item.id)} />
-    </td>
-    <div className="AddContent">
-    <td className="NameBox">
-      {item.isEditing ? (
-        <input
-          type="text"
-          value={editedName} // Use editedName for the input value
-          onChange={handleEditInputChange} // Use local state to handle input changes
-          onClick={(e) => e.stopPropagation()}
-        />
-      ) : (
-        item.name
-      )}
-    </td>
+      <td className="EditBTNBox">
+        <EditButton onEdit={() => onEdit(item.id)} />
+      </td>
+      <td className="NameBox">
+        {item.isEditing ? (
+          <input
+            type="text"
+            value={editedName}
+            onChange={handleEditInputChange}
+            onClick={(e) => e.stopPropagation()}
+          />
+        ) : (
+          item.name
+        )}
+      </td>
       <td className="SaveOrDeleteBTNBox">
         {item.isEditing && (
           <>
             <DeleteButton onDelete={() => onDelete(item.id)} />
-            <SaveButton onSave={() => onSave(item.id)} />
+            <SaveButton
+              onSave={() => {
+                onSave(item.id, editedName); // Pass editedName to onSave
+              }}
+            />
           </>
         )}
-      </td></div>
+      </td>
     </tr>
   );
 }
+
+
+
 
 export function DataTableContainer({ data, onEdit, onDelete, onSave, handleInputChange }) {
 
