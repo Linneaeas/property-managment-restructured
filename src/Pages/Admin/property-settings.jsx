@@ -1,10 +1,10 @@
 import React from "react";
-
+import { AdminSettingsSuites } from "./Property/property-settings-suites";
 
 export function AdminPropertySettings() {
   return (
     <div className="PropertyContent">
-    <h1>Settings</h1>
+    <AdminSettingsSuites></AdminSettingsSuites>
     </div>
   );
 }

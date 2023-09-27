@@ -8,12 +8,11 @@ import {AdminPropertyProperties} from "./Property/property-properties"
 
 export function AdminPropertyContent() {
   return (
-    <div className="PropertyContent">
-     <h1>Content</h1>
-     <AdminPropertyStandards></AdminPropertyStandards>
+    <div className="PropertyContentNames">
      <AdminPropertySuites></AdminPropertySuites>
+     <AdminPropertyStandards></AdminPropertyStandards>
+     <AdminPropertyRoomtypes></AdminPropertyRoomtypes> 
      <AdminPropertyBeds></AdminPropertyBeds>
-     <AdminPropertyRoomtypes></AdminPropertyRoomtypes>
      <AdminPropertyFacilities></AdminPropertyFacilities>
      <AdminPropertyProperties></AdminPropertyProperties>
     </div>

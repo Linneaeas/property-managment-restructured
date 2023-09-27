@@ -40,7 +40,7 @@ export function AdminPropertyBeds() {
                        onFocus={(e) => e.stopPropagation()}
                          />
                          <input
-  className="smallInput"
+  className="SmallInput"
   type="text"
   value={bedSize}
   placeholder="CM"
@@ -48,18 +48,13 @@ export function AdminPropertyBeds() {
   onChange={(e) => handleInputChange('bedSize', e.target.value)}
 />
 <input
-  className="smallInput"
+  className="SmallInput"
   type="text"
   value={bedPersons}
   placeholder="PRS"
   maxLength="3"
   onChange={(e) => handleInputChange('bedPersons', e.target.value)}
 />
-
-
-                    
-                      
-
                 <SaveButton onSave={() => handleAddItem('bed')} />
               </div>
             )}

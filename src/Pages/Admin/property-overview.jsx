@@ -9,7 +9,6 @@ export function AdminPropertyOverview() {
   const { data: facilities } = useDataManagement([], 'facilities');
   const { data: properties } = useDataManagement([], 'properties');
 
-  console.log('Beds Data newnew:', beds);
 
   return (
     <div className='PropertyContent'>
@@ -25,10 +24,12 @@ export function AdminPropertyOverview() {
         ))}
       </ul>
       <ul>
-        {beds.map((bed) => (
-          <li key={bed.id}>{bed.name}</li>
-        ))}
-      </ul>
+  {beds.map((bed) => (
+    <li key={bed.id}>
+      {bed.name} - Size: {bed.bedSize} cm, Persons: {bed.bedPersons}
+    </li>
+  ))}
+</ul>
       <ul>
         {roomtypes.map((roomtype) => (
           <li key={roomtype.id}>{roomtype.name}</li>
