@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDataManagement } from "./data-managment";
+import { useDataManagement } from "./useDataManagment";
 
 const useDataTableActions = (initialData, itemType) => {
   const storageKey = `${itemType}s`;
@@ -10,8 +10,6 @@ const useDataTableActions = (initialData, itemType) => {
     const [isAddingNewItem, setIsAddingNewItem] = useState(false);
     const [isEditingItem, setIsEditingItem] = useState(false);
     const [showInput, setShowInput] = useState(false);
-  
-
   
     const handleInputChange = (id, value) => {
         setNewName(value); 
@@ -32,19 +30,16 @@ const useDataTableActions = (initialData, itemType) => {
     const handleAddItem = () => {
         if (newName.trim() !== '') {
           const isDuplicateName = data.some((item) => item.name === newName);
-    
           if (isDuplicateName) {
             alert('Item with this name already exists. Please choose a new name.');
             return;
           }
-    
           const newItem = {
             id: newName,
             name: newName,
             isEditing: false,
             editedName: '',
           };
-    
           const updatedData = [...data, newItem];
           setData(updatedData);
           handleSaveToLocalStorage(updatedData);
@@ -53,10 +48,6 @@ const useDataTableActions = (initialData, itemType) => {
           setIsAddingNewItem(false);
         }
       };
-      
-  
-  
-
       const handleEdit = (id) => {
         const updatedData = data.map((item) => ({
           ...item,
@@ -65,7 +56,6 @@ const useDataTableActions = (initialData, itemType) => {
         setData(updatedData);
         handleSaveToLocalStorage(updatedData);
       };
-
       const handleSave = (id, editedName) => {
         const updatedData = data.map((item) => {
           if (item.id === id) {
@@ -77,14 +67,11 @@ const useDataTableActions = (initialData, itemType) => {
         setData(updatedData);
         handleSaveToLocalStorage(updatedData);
       };
-      
-
   const handleDelete = (id) => {
     const updatedData = data.filter((item) => item.id !== id);
     setData(updatedData);
     handleSaveToLocalStorage(updatedData);
   };
-
   const handleOutsideClick = () => {
     if (isAddingNewItem && !isEditingItem) {
       setIsAddingNewItem(false);
@@ -100,7 +87,6 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage(updatedData);
     }
   };
-
   return {
     data,
     newName,

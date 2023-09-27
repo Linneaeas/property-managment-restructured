@@ -1,5 +1,5 @@
 import React from "react";
-import { AdminPropertyStandards } from "../../PropertyComponents/property-standards";
+import { AdminPropertyStandards } from "./Property/property-standards";
 
 
 export function AdminPropertyContent() {

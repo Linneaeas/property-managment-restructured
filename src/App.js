@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
-import LoginForm from "./Views/login-form";
-import { AdminStart } from "./Views/Admin/admin-start";
+import LoginForm from "./Pages/Login/login-form";
+import { AdminStart } from "./Pages/Admin/admin-start";
 
 function App() {
   const adminUser = {

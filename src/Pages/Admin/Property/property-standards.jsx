@@ -1,10 +1,11 @@
 import React from 'react';
-import { AddButton, SaveButton, DeleteButton } from '../Components/buttons';
-import OutsideClickListener from '../Components/event-listeners';
-import { DataTableContainer } from '../Components/datatable';
-import useDataTableActions from '../Components/datatable-actions';
+import { AddButton, SaveButton, DeleteButton } from '../../../Components/buttons';
+import OutsideClickListener from '../../../Components/event-listeners';
+import { DataTableContainer } from '../../../Components/datatable';
+import useDataTableActions from '../../../Hooks/useDataTableActions';
 
 export function AdminPropertyStandards() {
+    // Destructure values from the useDataTableActions hook
     const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'standard');
 
     return (

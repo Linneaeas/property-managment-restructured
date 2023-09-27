@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDataManagement } from '../../Components/data-managment';
+import { useDataManagement } from '../../Hooks/useDataManagment';
 
 export function AdminPropertyOverview() {
   const { data: standards } = useDataManagement([], 'standards');
