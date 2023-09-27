@@ -9,8 +9,7 @@ export function AdminPropertyOverview() {
   const { data: facilities } = useDataManagement([], 'facilities');
   const { data: properties } = useDataManagement([], 'properties');
 
-  console.log('Beds Data:', beds);
-  console.log('Suites Data:', suites);
+  console.log('Beds Data newnew:', beds);
 
   return (
     <div className='PropertyContent'>

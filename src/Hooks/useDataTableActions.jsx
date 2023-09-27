@@ -7,47 +7,69 @@ const useDataTableActions = (initialData, itemType) => {
   const { data, setData, getDataFromLocalStorage, handleSaveToLocalStorage } = useDataManagement(initialData, storageKey);
    
     const [newName, setNewName] = useState('');
+    const [bedSize, setBedSize] = useState('');
+    const [bedPersons, setBedPersons] = useState('');
     const [isAddingNewItem, setIsAddingNewItem] = useState(false);
     const [isEditingItem, setIsEditingItem] = useState(false);
     const [showInput, setShowInput] = useState(false);
   
-    const handleInputChange = (id, value) => {
-        setNewName(value); 
-        const updatedData = data.map((item) =>
-          item.id === id ? { ...item, editedName: value } : item
-        );
-        setData(updatedData);
-        handleSaveToLocalStorage(updatedData);
-      };
-  
+
+    const handleInputChange = (field, value) => {
+      if (field === 'bedSize') {
+        setBedSize(value);
+      } else if (field === 'bedPersons') {
+        setBedPersons(value);
+      } else if (field === 'newName') {
+        setNewName(value);
+      }
+    
+      const updatedData = data.map((item) =>
+        item.id === field ? { ...item, [field]: parseInt(value, 10) || 0 } : item
+      );
+    
+      setData(updatedData);
+      handleSaveToLocalStorage(updatedData);
+    };
+    
+    
     const handleAddButtonClick = () => {
       setNewName('');
+      setBedSize('');  
+      setBedPersons(''); 
       setShowInput(true);
       setIsAddingNewItem(true);
     };
   
-
     const handleAddItem = () => {
-        if (newName.trim() !== '') {
-          const isDuplicateName = data.some((item) => item.name === newName);
-          if (isDuplicateName) {
-            alert('Item with this name already exists. Please choose a new name.');
-            return;
-          }
-          const newItem = {
-            id: newName,
-            name: newName,
-            isEditing: false,
-            editedName: '',
-          };
-          const updatedData = [...data, newItem];
-          setData(updatedData);
-          handleSaveToLocalStorage(updatedData);
-          setNewName('');
-          setShowInput(false);
-          setIsAddingNewItem(false);
+      if (newName.trim() !== '') {
+        const isDuplicateName = data.some((item) => item.name === newName);
+        if (isDuplicateName) {
+          alert('Item with this name already exists. Please choose a new name.');
+          return;
         }
-      };
+    
+        const newItem = {
+          id: newName,
+          name: newName,
+          bedSize: parseInt(bedSize, 10) || 0,
+          bedPersons: parseInt(bedPersons, 10) || 0,
+          isEditing: false,
+          editedName: '',
+        };
+    
+        const updatedData = [...data, newItem];
+        setData(updatedData);
+        handleSaveToLocalStorage(updatedData);
+        setNewName('');
+        setBedSize('');
+        setBedPersons('');
+        setShowInput(false);
+        setIsAddingNewItem(false);
+      }
+    };
+    
+   
+    
       const handleEdit = (id) => {
         const updatedData = data.map((item) => ({
           ...item,
@@ -87,6 +109,27 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage(updatedData);
     }
   };
+
+
+    const handleBedSizeChange = (id, e) => {
+    const updatedData = data.map((item) =>
+      item.id === id ? { ...item, bedSize: parseInt(e.target.value, 10) || 0 } : item
+    );
+    setData(updatedData);
+    handleSaveToLocalStorage(updatedData);
+  };
+  
+  const handleBedPersonsChange = (id, e) => {
+    const updatedData = data.map((item) =>
+      item.id === id ? { ...item, bedPersons: parseInt(e.target.value, 10) || 0 } : item
+    );
+    setData(updatedData);
+    handleSaveToLocalStorage(updatedData);
+  };
+  
+
+  
+
   return {
     data,
     newName,
@@ -100,6 +143,9 @@ const useDataTableActions = (initialData, itemType) => {
     handleDelete,
     handleOutsideClick,
     handleSaveToLocalStorage,
+    handleBedPersonsChange,
+    handleBedSizeChange,
+   
   };
 };
 

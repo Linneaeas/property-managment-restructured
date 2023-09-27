@@ -6,6 +6,8 @@ export function useDataManagement(initialData, storageKey) {
     return storedData ? JSON.parse(storedData) : initialData;
   });
 
+
+
   useEffect(() => {
     const storedData = localStorage.getItem(storageKey);
     if (storedData) {

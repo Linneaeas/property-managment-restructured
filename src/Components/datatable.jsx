@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { EditButton, SaveButton, DeleteButton } from "./buttons";
-import {useDataTableActions} from "../Hooks/useDataTableActions"
+import useDataTableActions from "../Hooks/useDataTableActions";
 
-export function DataTableRow({ item, onEdit, onDelete, onSave, handleInputChange }) {
+
+export function DataTableRow({ item, onEdit, onDelete, onSave, handleInputChange, handleBedPersonsChange, handleBedSizeChange, }) {
   const [editedName, setEditedName] = useState(item.name);
   const handleEditInputChange = (e) => {
     setEditedName(e.target.value);
@@ -42,7 +43,7 @@ export function DataTableRow({ item, onEdit, onDelete, onSave, handleInputChange
     </tr>
   );
 }
-export function DataTableContainer({ data, onEdit, onDelete, onSave, handleInputChange }) {
+export function DataTableContainer({ data, onEdit, onDelete, onSave, handleInputChange, handleBedPersonsChange, handleBedSizeChange }) {
   return (
     <table className="PropertyTable">
       <tbody>
@@ -54,6 +55,8 @@ export function DataTableContainer({ data, onEdit, onDelete, onSave, handleInput
             onDelete={onDelete}
             onSave={onSave}
             handleInputChange={handleInputChange}
+            handleBedPersonsChange={(id, e) => handleBedPersonsChange(id, e)} 
+            handleBedSizeChange={(id, e) => handleBedSizeChange(id, e)} 
           />
         ))}
       </tbody>
