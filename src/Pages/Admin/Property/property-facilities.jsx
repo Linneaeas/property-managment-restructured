@@ -6,7 +6,7 @@ import useDataTableActions from '../../../Hooks/useDataTableActions';
 
 export function AdminPropertyFacilities() {
     // Destructure values from the useDataTableActions hook
-    const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'facilitie');
+    const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'facility');
 
     return (
       <div className="PropertyContainer">
