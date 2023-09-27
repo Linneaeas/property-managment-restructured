@@ -19,12 +19,16 @@ export function AddButton({ onAdd }) {
 }
 
 export function EditButton({ onEdit }) {
+ 
   return (
+
     <div>
       <button className="EditBTN" id="EditButton" onClick={onEdit}></button>
     </div>
   );
 }
+
+
 
 export function SaveButton({ onSave }) {
   return (

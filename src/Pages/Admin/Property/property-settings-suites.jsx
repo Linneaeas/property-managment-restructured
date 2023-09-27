@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { EditButton, SaveButton } from '../../../Components/buttons';
 import OutsideClickListener from '../../../Components/event-listeners';
 import useDataTableActions from '../../../Hooks/useDataTableActions';
-import { useDataManagement } from "../../../Hooks/useDataManagment";
+import {useDataManagement } from "../../../Hooks/useDataManagment";
 
 
-export function DataTable({ item, onEdit, onSave, handleInputChange, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleEdit, handleSave,}) {
+export function DataTable({ item, data,  onEdit, onSave, handleInputChange, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleEdit, handleSave,}) {
       
 
 const { data: standards } = useDataManagement([], 'standards');
@@ -32,9 +32,9 @@ const { data: properties } = useDataManagement([], 'properties');
       <tbody>
         {suites.map((suite) => (
           <tr key={suite.id}>
-            <td className="ColHeadline">{suite.name}</td>
+            <td className="ColHeadline">{suite.id}</td>
             <td className="EditBTNBox">
-              <EditButton onEdit={() => onEdit(suite.id)} />
+              <EditButton onEdit={() => onEdit(suite.name)} />
             </td>
             <td className="SuitesStandardBox">
               {suite.isEditing ? (
@@ -110,7 +110,7 @@ const { data: properties } = useDataManagement([], 'properties');
 }
 
 export function AdminSettingsSuites() {
-    const { data, item, newName, selectedPropertie, selectedStandard, isEditingItem, handleInputChange, handleEdit, handleSave, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'suite');
+    const { data, item, newName, selectedPropertie, selectedStandard, isEditingItem, handleInputChange, handleEdit, handleSave, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleSaveToLocalStorage, onEdit,} = useDataTableActions([], 'suite');
 
        
         

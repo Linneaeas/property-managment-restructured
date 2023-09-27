@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDataManagement } from "./useDataManagment";
+import { EditButton} from "../Components/buttons"
 
 const useDataTableActions = (initialData, itemType) => {
   const storageKey = `${itemType}s`;
@@ -85,6 +86,7 @@ const useDataTableActions = (initialData, itemType) => {
           ...item,
           isEditing: item.id === id ? !item.isEditing : false,
         }));
+
         setData(updatedData);
         handleSaveToLocalStorage(updatedData);
       };
