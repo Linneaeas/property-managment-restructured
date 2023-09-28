@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDataManagement } from '../../Hooks/useDataManagment';
+import { useLocalStorage } from '../../Hooks/useLocalStorage';
 
 export function AdminPropertyOverview() {
-  const { data: standards } = useDataManagement([], 'standards');
-  const { data: suites } = useDataManagement([], 'suites');
-  const { data: beds } = useDataManagement([], 'beds');
-  const { data: roomtypes } = useDataManagement([], 'roomtypes');
-  const { data: facilities } = useDataManagement([], 'facilities');
-  const { data: properties } = useDataManagement([], 'properties');
+  const { data: standards } = useLocalStorage([], 'standards');
+  const { data: suites } = useLocalStorage([], 'suites');
+  const { data: beds } = useLocalStorage([], 'beds');
+  const { data: roomtypes } = useLocalStorage([], 'roomtypes');
+  const { data: facilities } = useLocalStorage([], 'facilities');
+  const { data: properties } = useLocalStorage([], 'properties');
 
 
   return (

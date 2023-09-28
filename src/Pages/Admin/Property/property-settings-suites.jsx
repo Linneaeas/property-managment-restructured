@@ -1,23 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { EditButton, SaveButton } from '../../../Components/buttons';
 import OutsideClickListener from '../../../Components/event-listeners';
-import useDataTableActions from '../../../Hooks/useDataTableActions';
-import {useDataManagement } from "../../../Hooks/useDataManagment";
+import { useLocalStorage } from "../../../Hooks/useLocalStorage";
 
 
-export function DataTable({ item, data,  onEdit, onSave, handleInputChange, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleEdit, handleSave,}) {
-      
+export function DataTable({  data, setData, updatedData, handleSaveToLocalStorage,  onEdit, onSave, selectedPropertie, selectedStandard}) {
+  
+const { data: standards } = useLocalStorage([], 'standards');
+const { data: suites } = useLocalStorage([], 'suites');
+const { data: properties } = useLocalStorage([], 'properties');
 
-const { data: standards } = useDataManagement([], 'standards');
-const { data: suites } = useDataManagement([], 'suites');
-const { data: properties } = useDataManagement([], 'properties');
+const propertieHeaders = properties.map((propertie) => (
+  <th className="ColHeadline" key={propertie.id}>
+    {propertie.name}
+  </th>
+));
 
+const handleStandardOptionChange = (value,) => {
+  const updatedData = suites.map((suite) =>
+    suite === suite
+     ? {
+          ...suite,
+          selectedStandard: value,
+        }
+      : suite
+  );
+  setData(updatedData);
+};
 
-  const propertieHeaders = properties.map((propertie) => (
-    <th className="ColHeadline" key={propertie.id}>
-      {propertie.name}
-    </th>
-  ));
+const handlePropertieOptionChange = (propertie, value) => {
+  const updatedData = suites.map((suite) =>
+    suite === suite
+      ? {
+          ...suite,
+          selectedPropertie: {
+            ...suite.selectedPropertie,
+            [propertie.id]: parseInt(value, 10),
+          },
+        }
+      : suite
+  );
+  setData(updatedData);
+};
+
 
   return (
     <table className="PropertyTable">
@@ -32,9 +57,9 @@ const { data: properties } = useDataManagement([], 'properties');
       <tbody>
         {suites.map((suite) => (
           <tr key={suite.id}>
-            <td className="ColHeadline">{suite.id}</td>
+            <td className="ColHeadline">{suite.name}</td>
             <td className="EditBTNBox">
-              <EditButton onEdit={() => onEdit(suite.name)} />
+            <EditButton onEdit={() => onEdit(suite.id)} />
             </td>
             <td className="SuitesStandardBox">
               {suite.isEditing ? (
@@ -67,8 +92,8 @@ const { data: properties } = useDataManagement([], 'properties');
                       type="text"
                       className="SmallInput"
                       value={
-                        (suite.propertieOptions &&
-                          suite.propertieOptions[propertie.id]) ||
+                        (suite.selectedPropertie &&
+                          suite.selectedPropertie[propertie.id]) ||
                         ""
                       }
                       onChange={(e) =>
@@ -82,10 +107,10 @@ const { data: properties } = useDataManagement([], 'properties');
                   </div>
                 ) : (
                   <div className="OptionChoice">
-                    {suite.propertieOptions &&
-                    suite.propertieOptions[propertie.id] ? (
+                    {suite.selectedPropertie &&
+                    suite.selectedPropertie[propertie.id] ? (
                       <span className="OptionChoice">
-                        {suite.propertieOptions[propertie.id]}
+                        {suite.selectedPropertie[propertie.id]}
                       </span>
                     ) : (
                       <span className="NoSelection">{"-"}</span>
@@ -110,17 +135,37 @@ const { data: properties } = useDataManagement([], 'properties');
 }
 
 export function AdminSettingsSuites() {
-    const { data, item, newName, selectedPropertie, selectedStandard, isEditingItem, handleInputChange, handleEdit, handleSave, handlePropertieOptionChange, handleStandardOptionChange, handleOutsideClick, handleSaveToLocalStorage, onEdit,} = useDataTableActions([], 'suite');
+    const { data, setData, updatedData, onEdit, onSave, handlePropertieOptionChange, handleStandardOptionChange, handleSaveToLocalStorage} = useLocalStorage([], 'suite');
+    const [isEditingSuite, setIsEditingSuite] = useState(false);
+    const [selectedStandard, setSelectedStandard] = useState('');
+    const [selectedPropertie, setSelectedPropertie] = useState('');
+    const [showInput, setShowInput] = useState(false);
 
-       
-        
+    const handleEdit = (id) => {
+      console.log("Edit triggered with id:", id);
+      const updatedData = data.map((suite) => ({
+        ...suite,
+        isEditing: id === id ? !suite.isEditing : false,
+      })); 
+      setData(updatedData); 
+    };
+    
+    const handleSave = (id, selectedPropertie, selectedStandard) => {
+      const updatedData = data.map((suite) => {
+        if (suite.id === id) {
+          setIsEditingSuite(false);
+          return { ...suite, isEditing: false, selectedPropertie: selectedPropertie, selectedStandard: selectedStandard};
+        }
+        return suite;
+      });
+      setData(updatedData);
+      handleSaveToLocalStorage(updatedData);
+    };
 
-  const [showInput, setShowInput] = useState(false);
-  const [isEditingSuite, setIsEditingSuite] = useState(false);
 
   return (
     <div className="PropertyContainer">
-      <OutsideClickListener onOutsideClick={handleOutsideClick}>
+    
         <div className="PropertyContent">
           <h1>SUITES</h1>
           <h2>Suites, standard & properties</h2>
@@ -128,13 +173,17 @@ export function AdminSettingsSuites() {
               data={data} 
               onEdit={handleEdit}
               onSave={handleSave}
-              handleInputChange={handleInputChange}
+              setData={setData}
+              setIsEditingSuite={setIsEditingSuite}
+              isEditingSuite={isEditingSuite}
               handlePropertieOptionChange={handlePropertieOptionChange}
               handleStandardOptionChange={handleStandardOptionChange}
-             
+              selectedStandard={selectedStandard}
+              selectedPropertie={selectedPropertie}
+              setSelectedStandard={setSelectedStandard}
+              SetSelectedPropertie={setSelectedPropertie}
           />
         </div>
-      </OutsideClickListener>
     </div>
   );
 }

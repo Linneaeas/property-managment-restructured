@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { useDataManagement } from "./useDataManagment";
+import { useLocalStorage } from "./useLocalStorage";
 import { EditButton} from "../Components/buttons"
 
 const useDataTableActions = (initialData, itemType) => {
   const storageKey = `${itemType}s`;
   
-  const { data, setData, getDataFromLocalStorage, handleSaveToLocalStorage } = useDataManagement(initialData, storageKey);
+  const { data, setData, getDataFromLocalStorage, handleSaveToLocalStorage } = useLocalStorage(initialData, storageKey);
    
     const [newName, setNewName] = useState('');
     const [bedSize, setBedSize] = useState('');
     const [bedPersons, setBedPersons] = useState('');
-    const [selectedStandard, setSelectedStandard] = useState('');
-    const [selectedPropertie, setSelectedPropertie] = useState('');
     const [isAddingNewItem, setIsAddingNewItem] = useState(false);
     const [isEditingItem, setIsEditingItem] = useState(false);
     const [showInput, setShowInput] = useState(false);
@@ -24,11 +22,7 @@ const useDataTableActions = (initialData, itemType) => {
         setBedPersons(value);
       } else if (field === 'newName') {
         setNewName(value);
-      } else if (field === 'selectedStandard') {
-        setSelectedStandard(value);
-      } else if (field === 'selectedPropertie') {
-        setSelectedPropertie(value);
-      }
+      } 
     
       const updatedData = data.map((item) =>
         item.id === field ? { ...item, [field]: parseInt(value, 10) || 0 } : item
@@ -61,8 +55,6 @@ const useDataTableActions = (initialData, itemType) => {
           bedSize: parseInt(bedSize, 10) || 0,
           bedPersons: parseInt(bedPersons, 10) || 0,
           type: itemType,
-          selectedStandard: selectedStandard,
-          selectedPropertie: selectedPropertie,
           isEditing: false,
           editedName: '',
         };
@@ -73,8 +65,6 @@ const useDataTableActions = (initialData, itemType) => {
         setNewName('');
         setBedSize('');
         setBedPersons('');
-        setSelectedStandard('');
-        setSelectedPropertie('');
         setShowInput(false);
         setIsAddingNewItem(false);
       }
@@ -142,34 +132,7 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage(updatedData);
   };
   
-  const handleStandardOptionChange = (id, suite, selectedStandard, value) => {
-    const updatedData = data.map((suite) =>
-      suite.id === id
-       ? {
-            ...suite,
-            selectedStandard: value,
-          }
-        : suite
-    );
-    setData(updatedData);
-    handleSaveToLocalStorage(updatedData);
-  };
 
-  const handlePropertieOptionChange = (id, suite, propertie, propertieOptions, value) => {
-    const updatedData = data.map((suite) =>
-      suite.id === id
-        ? {
-            ...suite,
-            propertieOptions: {
-              ...suite.propertieOptions,
-              [propertie.id]: parseInt(value, 10),
-            },
-          }
-        : suite
-    );
-    setData(updatedData);
-    handleSaveToLocalStorage(updatedData);
-  };
 
 
 
@@ -188,8 +151,7 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage,
     handleBedPersonsChange,
     handleBedSizeChange,
-    handlePropertieOptionChange, 
-    handleStandardOptionChange
+
    
   };
 };

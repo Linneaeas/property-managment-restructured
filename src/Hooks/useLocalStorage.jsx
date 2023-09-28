@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 
-export function useDataManagement(initialData, storageKey) {
+export function useLocalStorage(initialData, storageKey) {
   const [data, setData] = useState(() => {
     const storedData = localStorage.getItem(storageKey);
     return storedData ? JSON.parse(storedData) : initialData;
   });
-
 
 
   useEffect(() => {
@@ -32,5 +31,6 @@ export function useDataManagement(initialData, storageKey) {
     setData,
     getDataFromLocalStorage,
     handleSaveToLocalStorage,
+
   };
 }
