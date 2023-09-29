@@ -14,8 +14,6 @@ const useDataTableActions = (initialData, itemType) => {
     const [isEditingItem, setIsEditingItem] = useState(false);
     const [showInput, setShowInput] = useState(false);
   
-
-
     const handleInputChange = (field, value) => {
       if (field === 'bedSize') {
         setBedSize(value);
@@ -24,7 +22,7 @@ const useDataTableActions = (initialData, itemType) => {
       } else if (field === 'newName') {
         setNewName(value);
       } 
-     
+
       const updatedData = data.map((item) =>
         item.id === field ? { ...item, [field]: parseInt(value, 10) || 0 } : item
       );
@@ -85,7 +83,7 @@ const useDataTableActions = (initialData, itemType) => {
         const updatedData = data.map((item) => {
           if (item.id === id) {
             setIsEditingItem(false);
-            return { ...item, isEditing: false, name: editedName };
+            return { ...item, isEditing: false, name: editedName};
           }
           return item;
         });
@@ -131,9 +129,12 @@ const useDataTableActions = (initialData, itemType) => {
     setData(updatedData);
     handleSaveToLocalStorage(updatedData);
   };
+
+ 
   
   return {
     data,
+    setData,
     newName,
     isAddingNewItem,
     isEditingItem,
