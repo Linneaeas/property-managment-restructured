@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { EditButton, SaveButton, DeleteButton } from "./buttons";
 import useDataTableActions from "../Hooks/useDataTableActions";
+import { useLocalStorage } from '../Hooks/useLocalStorage';
 
 export function DataTableRow({ item, onEdit, onDelete, onSave, handleInputChange, handleBedPersonsChange, handleBedSizeChange }) {
   const [editedName, setEditedName] = useState(item.name);

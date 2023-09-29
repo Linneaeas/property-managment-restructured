@@ -3,10 +3,11 @@ import { AddButton, SaveButton, DeleteButton } from '../../../Components/buttons
 import OutsideClickListener from '../../../Components/event-listeners';
 import { DataTableContainer } from '../../../Components/datatable';
 import useDataTableActions from '../../../Hooks/useDataTableActions';
+import { useLocalStorage } from '../../../Hooks/useLocalStorage';
 
 export function AdminPropertySuites() {
     // Destructure values from the useDataTableActions hook
-    const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'suite');
+    const { data, newName, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'suites');
 
     return (
       <div className="PropertyContainer">

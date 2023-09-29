@@ -3,18 +3,23 @@ import { useLocalStorage } from "../../../Hooks/useLocalStorage";
 import { EditButton, SaveButton } from "../../../Components/buttons";
 import OutsideClickListener from "../../../Components/event-listeners";
 import CheckedIcon from "../../../Images/CheckedIcon.png";
+import useDataTableActions from "../../../Hooks/useDataTableActions";
 
-export function DataTable({
-  data,
-  setData, 
-  updatedData, 
-  handleSaveToLocalStorage, 
-  onEdit,
-  onSave,
-}) {
-      
-const { data: standards } = useLocalStorage([], 'standards');
-const { data: facilities } = useLocalStorage([], 'facilities');
+export function DataTable() {
+  const {
+    data: standards,
+    handleEdit,
+    handleSave,
+    handleDelete,
+    handleOutsideClick,
+    facilityOption,
+    handleFacilityOptionChange,
+    setFacilityOption,
+    handleSaveToLocalStorage,
+    onEdit, onSave
+  } = useDataTableActions([], 'standards');
+
+  const { data: facilities } = useLocalStorage([], 'facilities');
 
   const facilityHeaders = facilities.map((facility) => (
     <th className="ColHeadline" key={facility.id}>
@@ -22,19 +27,8 @@ const { data: facilities } = useLocalStorage([], 'facilities');
     </th>
   ));
 
-  const handleFacilityOptionChange = (id, isChecked, facility) => {
-    const updatedData = standards.map((standard) =>
-      standard.id === id
-        ? {
-            ...standard,
-            facilityOption: {
-              ...standard.facilityOption,
-              [facility.id]: isChecked,
-            },
-          }
-        : standard
-    );
-    setData(updatedData);
+  const handleEditInputChange = (e) => {
+    setFacilityOption(e.target.value);
   };
 
   return (
@@ -104,64 +98,9 @@ const { data: facilities } = useLocalStorage([], 'facilities');
 }
 
 export function AdminSettingsFacilities() {
-    const { data, setData, updatedData, onEdit, onSave, handleSaveToLocalStorage} = useLocalStorage([], 'standards');
+  const { data, setData, item, isEditingItem, handleInputChange, handleEdit, handleSave, handleDelete,  handleOutsideClick, facilityOption, setFacilityOption, handleFacilityOptionChange, handleSaveToLocalStorage } = useDataTableActions([], 'standards');
 
-    const { data: standards } = useLocalStorage([], 'standards');
-    const { data: facilities } = useLocalStorage([], 'facilities');
 
-  const [showInput, setShowInput] = useState(false);
-  const [isEditingStandard, setIsEditingStandard] = useState(false);
- 
-
- 
-  const handleEdit = (id) => {
-    console.log('Editing standard with ID:', id);
-    const updatedData = standards.map((standard) => {
-      if (standard.id === id) {
-        return {
-          ...standard,
-          isEditing: !standard.isEditing,
-        };
-      }
-      return {
-        ...standard,
-        isEditing: false,
-      };
-    });
-
-    setData(updatedData);
-  };
-
-  const handleSave = (id) => {
-    const updatedData = standards.map((standard) => {
-      if (standard.id === id) {
-        return {
-          ...standard,
-          isEditing: false,
-          selectedFacilitySetting: standard.selectedFacilitySetting,
-        };
-      }
-      return standard;
-    });
-
-    setData(updatedData);
-    handleSaveToLocalStorage(updatedData);
-  };
-
-  const handleOutsideClick = () => {
-    if (!isEditingStandard) {
-      setShowInput(false);
-    }
-
-    if (isEditingStandard) {
-      const updatedData= standards.map((standard) => ({
-        ...standard,
-        isEditing: false,
-      }));
-      setData(updatedData);
-      setIsEditingStandard(false);
-    }
-  };
 
   return (
     <div className="PropertyContainer">
@@ -174,7 +113,9 @@ export function AdminSettingsFacilities() {
             setData={setData}
             onEdit={handleEdit}
             onSave={handleSave}
-            isEditingStandard={isEditingStandard}
+            handleFacilityOptionChange={handleFacilityOptionChange}
+            setFacilityOption={setFacilityOption}
+            facilityOption={facilityOption}
             handleOutsideClick={handleOutsideClick}
             handleSaveToLocalStorage={handleSaveToLocalStorage}
           />

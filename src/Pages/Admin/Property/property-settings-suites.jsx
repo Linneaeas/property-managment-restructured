@@ -145,7 +145,7 @@ export function AdminSettingsSuites() {
       console.log("Edit triggered with id:", id);
       const updatedData = data.map((suite) => ({
         ...suite,
-        isEditing: id === id ? !suite.isEditing : false,
+        isEditing: id === id ? !suite.isEditing : true,
       })); 
       setData(updatedData); 
     };
