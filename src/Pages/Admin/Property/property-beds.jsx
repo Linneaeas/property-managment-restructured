@@ -7,7 +7,7 @@ import { useLocalStorage } from '../../../Hooks/useLocalStorage';
 
 export function AdminPropertyBeds() {
     // Destructure values from the useDataTableActions hook
-    const { data, item, newName, bedSize, bedPersons, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleBedPersonsChange, handleBedSizeChange, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'beds');
+    const { data, item, newName, bedSize, bedPersons, isAddingNewItem, isEditingItem, handleInputChange, handleAddButtonClick, handleAddItem, handleEdit, handleSave, handleDelete, handleBedPersonsChange, handleBedSizeChange, handleOutsideClick, handleSaveToLocalStorage } = useDataTableActions([], 'bed');
 
    
 

@@ -9,7 +9,7 @@ export function AdminPropertyOverview() {
   const { data: facilities } = useLocalStorage([], 'facilities');
   const { data: properties } = useLocalStorage([], 'properties');
 
-
+  
   return (
     <div className='PropertyContent'>
       <h1>Overview</h1>
@@ -36,8 +36,8 @@ export function AdminPropertyOverview() {
         ))}
       </ul>
       <ul>
-        {facilities.map((facility) => (
-          <li key={facility.id}>{facility.name}</li>
+        {facilities.map((facilitie) => (
+          <li key={facilitie.id}>{facilitie.name}</li>
         ))}
       </ul>
       <ul>

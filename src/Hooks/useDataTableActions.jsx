@@ -10,25 +10,11 @@ const useDataTableActions = (initialData, itemType) => {
     const [newName, setNewName] = useState('');
     const [bedSize, setBedSize] = useState('');
     const [bedPersons, setBedPersons] = useState('');
-    const [facilityOption, setFacilityOption] = useState('');
     const [isAddingNewItem, setIsAddingNewItem] = useState(false);
     const [isEditingItem, setIsEditingItem] = useState(false);
     const [showInput, setShowInput] = useState(false);
   
-    const handleFacilityOptionChange = (id, isChecked, facility) => {
-      const updatedData = data.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              facilityOption: {
-                ...item.facilityOption,
-                [facility.id]: isChecked,
-              },
-            }
-          : item
-      );
-      setData(updatedData);
-    };
+
 
     const handleInputChange = (field, value) => {
       if (field === 'bedSize') {
@@ -38,10 +24,7 @@ const useDataTableActions = (initialData, itemType) => {
       } else if (field === 'newName') {
         setNewName(value);
       } 
-      else if (field === 'facilityOption') {
-        setFacilityOption(value);
-      } 
-    
+     
       const updatedData = data.map((item) =>
         item.id === field ? { ...item, [field]: parseInt(value, 10) || 0 } : item
       );
@@ -72,8 +55,6 @@ const useDataTableActions = (initialData, itemType) => {
           name: newName,
           bedSize: parseInt(bedSize, 10) || 0,
           bedPersons: parseInt(bedPersons, 10) || 0,
-          facilityOption: facilityOption,
-          type: itemType,
           isEditing: false,
           editedName: '',
         };
@@ -84,7 +65,6 @@ const useDataTableActions = (initialData, itemType) => {
         setNewName('');
         setBedSize('');
         setBedPersons('');
-        setFacilityOption('');
         setShowInput(false);
         setIsAddingNewItem(false);
       }
@@ -94,7 +74,7 @@ const useDataTableActions = (initialData, itemType) => {
       const handleEdit = (id) => {
         const updatedData = data.map((item) => ({
           ...item,
-          isEditing: item.id === id ? !item.isEditing : true,
+          isEditing: item.id === id ? !item.isEditing : false,
         }));
 
         setData(updatedData);
@@ -152,10 +132,6 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage(updatedData);
   };
   
-
-
-
-
   return {
     data,
     newName,
@@ -171,7 +147,6 @@ const useDataTableActions = (initialData, itemType) => {
     handleSaveToLocalStorage,
     handleBedPersonsChange,
     handleBedSizeChange,
-    handleFacilityOptionChange,
     storageKey,
   };
 };
