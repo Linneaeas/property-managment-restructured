@@ -74,7 +74,7 @@ const useDataTableActions = (initialData, itemType) => {
       const handleEdit = (id) => {
         const updatedData = data.map((item) => ({
           ...item,
-          isEditing: item.id === id ? !item.isEditing : false,
+          isEditing: item.id === id ? !item.isEditing : true,
         }));
 
         setData(updatedData);
